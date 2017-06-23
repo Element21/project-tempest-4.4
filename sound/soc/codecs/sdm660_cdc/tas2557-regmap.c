@@ -22,7 +22,6 @@
 
 #ifdef CONFIG_TAS2557_REGMAP
 
-#define DEBUG
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>
@@ -597,7 +596,7 @@ static void timer_work_routine(struct work_struct *work)
 					if (nResult < 0)
 						goto end;
 					pTAS2557->mnDevCurrentGain = LOW_TEMPERATURE_GAIN;
-					dev_dbg(pTAS2557->dev, "LOW Temp: set gain to %d\n", LOW_TEMPERATURE_GAIN);
+					dev_info(pTAS2557->dev, "LOW Temp: set gain to %d\n", LOW_TEMPERATURE_GAIN);
 				}
 			} else if (nAvg > 5) {
 				/* if Die temperature is above 5 degree C */
@@ -606,7 +605,7 @@ static void timer_work_routine(struct work_struct *work)
 					if (nResult < 0)
 						goto end;
 					pTAS2557->mnDevCurrentGain = pTAS2557->mnDevGain;
-					dev_dbg(pTAS2557->dev, "LOW Temp: set gain to original\n");
+					dev_info(pTAS2557->dev, "LOW Temp: set gain to original\n");
 				}
 			}
 			nAvg = 0;
