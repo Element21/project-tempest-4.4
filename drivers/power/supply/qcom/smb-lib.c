@@ -2031,14 +2031,14 @@ int smblib_set_prop_system_temp_level(struct smb_charger *chg,
 	if (val->intval > chg->thermal_levels)
 		return -EINVAL;
 
-	#ifdef THERMAL_CONFIG_FB
-	pr_err("smblib_set_prop_system_temp_level val=%d, chg->system_temp_level=%d, LctThermal=%d, lct_backlight_off= %d, IsInCall=%d, hwc_check_india=%d\n ", 
+#ifdef THERMAL_CONFIG_FB
+	pr_debug("smblib_set_prop_system_temp_level val=%d, chg->system_temp_level=%d, LctThermal=%d, lct_backlight_off= %d, IsInCall=%d, hwc_check_india=%d\n ", 
 		val->intval,chg->system_temp_level, LctThermal, lct_backlight_off, LctIsInCall, hwc_check_india);
 	
 	if (LctThermal == 0) {
-	    #if defined(CONFIG_KERNEL_CUSTOM_D2S) || defined(CONFIG_KERNEL_CUSTOM_F7A)
+#if defined(CONFIG_KERNEL_CUSTOM_D2S) || defined(CONFIG_KERNEL_CUSTOM_F7A)
 		if (val->intval < 6)
-		#endif
+#endif
 		lct_therm_lvl_reserved.intval = val->intval;
 	}
 #if defined(CONFIG_KERNEL_CUSTOM_E7S)
@@ -2088,14 +2088,14 @@ int smblib_set_prop_system_temp_level(struct smb_charger *chg,
 		return 0;
 	}
 #endif
-	#if defined(CONFIG_KERNEL_CUSTOM_D2S)
+#if defined(CONFIG_KERNEL_CUSTOM_D2S)
 	if ((LctIsInVideo == 1) && (val->intval != 6) && (lct_backlight_off == 0) && (hwc_check_india == 1)) {
 	    return 0;
 	}
-	#endif
+#endif
 	if (val->intval == chg->system_temp_level)
 		return 0;
-	#endif
+#endif
 
 	chg->system_temp_level = val->intval;
 	/* disable parallel charge in case of system temp level */
