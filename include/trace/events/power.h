@@ -777,6 +777,7 @@ TRACE_EVENT(memlat_dev_update,
 		__entry->freq,
 		__entry->vote)
 );
+
 #endif /* _TRACE_POWER_H */
 
 /* This part must be outside protection */
