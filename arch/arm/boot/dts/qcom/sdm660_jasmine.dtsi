@@ -492,7 +492,13 @@
 			reg = <0x0 0xA0000000 0x0 0x00400000>;
 			label = "pstore_reserve_mem";
 		};
-    };		
+
+		ramoops_mem: ramoops_region@b0000000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0xA0000000 0 0x00400000>;
+		};
+	};
 
 	bluetooth: bt_wcn3990 {
 		compatible = "qca,wcn3990";
@@ -511,6 +517,15 @@
 		qca,bt-vdd-core-current-level = <1>; /* LPM/PFM */
 		qca,bt-vdd-pa-current-level = <1>; /* LPM/PFM */
 		qca,bt-vdd-ldo-current-level = <1>; /* LPM/PFM */
+	};
+};
+
+&soc {
+	ramoops {
+		compatible = "ramoops";
+		memory-region = <&ramoops_mem>;
+		console-size = <0x0 0x200000>;
+		pmsg-size = <0x0 0x200000>;
 	};
 };
 
