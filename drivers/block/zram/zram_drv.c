@@ -1502,10 +1502,14 @@ static ssize_t disksize_store(struct device *dev,
 	if (simple_strtoull(buf, &endptr, 0) > simple_strtoull(maxsize, &endptr, 0))
 		buf = maxsize;
 
+#ifdef CONFIG_ZRAM_SIZE_OVERRIDE
+	disksize = (u64)SZ_1G * CONFIG_ZRAM_SIZE_OVERRIDE;
+	pr_info("Overriding zram size to %li", disksize);
+#else
 	disksize = memparse(buf, NULL);
 	if (!disksize)
 		return -EINVAL;
-
+#endif
 	down_write(&zram->init_lock);
 	if (init_done(zram)) {
 		pr_info("Cannot change disksize for initialized device\n");
