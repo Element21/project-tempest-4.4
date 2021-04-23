@@ -757,8 +757,8 @@ static inline void crypto_xor_cpy(u8 *dst, const u8 *src1, const u8 *src2,
 #define hlist_add_behind(a, b) hlist_add_after(b, a)
 #endif
 
-#if 0 //LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0) && !defined(ISCENTOS8S)
-#define totalram_pages() totalram_pages
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0) && !defined(ISCENTOS8S)
+#define totalrampages totalram_pages()
 #endif
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 18, 0)
