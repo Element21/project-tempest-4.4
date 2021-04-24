@@ -259,6 +259,12 @@ QDF_STATUS qdf_wake_lock_create(qdf_wake_lock_t *lock, const char *name)
 {
 	return QDF_STATUS_SUCCESS;
 }
+#else
+QDF_STATUS qdf_wake_lock_create(qdf_wake_lock_t *lock, const char *name)
+{
+	return QDF_STATUS_SUCCESS;
+}
+#endif
 qdf_export_symbol(qdf_wake_lock_create);
 
 /**
@@ -289,6 +295,12 @@ QDF_STATUS qdf_wake_lock_timeout_acquire(qdf_wake_lock_t *lock, uint32_t msec)
 {
 	return QDF_STATUS_SUCCESS;
 }
+#else /* LINUX_VERSION_CODE */
+QDF_STATUS qdf_wake_lock_timeout_acquire(qdf_wake_lock_t *lock, uint32_t msec)
+{
+	return QDF_STATUS_SUCCESS;
+}
+#endif /* LINUX_VERSION_CODE */
 qdf_export_symbol(qdf_wake_lock_timeout_acquire);
 
 /**
@@ -318,6 +330,12 @@ QDF_STATUS qdf_wake_lock_destroy(qdf_wake_lock_t *lock)
 {
 	return QDF_STATUS_SUCCESS;
 }
+#else
+QDF_STATUS qdf_wake_lock_destroy(qdf_wake_lock_t *lock)
+{
+	return QDF_STATUS_SUCCESS;
+}
+#endif
 qdf_export_symbol(qdf_wake_lock_destroy);
 
 #ifdef CONFIG_MCL
