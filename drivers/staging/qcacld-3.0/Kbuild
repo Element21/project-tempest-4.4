@@ -1954,8 +1954,12 @@ EXTRA_CFLAGS += -Wmaybe-uninitialized
 endif
 EXTRA_CFLAGS += -Wmissing-prototypes
 
-ifeq ($(call cc-option-yn, -Wheader-guard),y)
-EXTRA_CFLAGS += -Wheader-guard
+# optimise for size
+subdir-ccflags-y += $(call cc-option, -g0)
+subdir-ccflags-y += $(call cc-option, -Os)
+
+ifeq ($(call cc-option-yn, -Wheader-guard), y)
+ccflags-y += -Wheader-guard
 endif
 
 # To build without debug just ignore not used code.
