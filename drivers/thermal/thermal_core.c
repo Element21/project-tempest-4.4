@@ -1004,7 +1004,7 @@ static ssize_t
 sconfig_store(struct device *dev, struct device_attribute *devattr,
 		const char *buf, size_t count){
 	int sconfig;
-	struct thermal_message_device *thermal_msg = to_thermal_msg_device(dev);
+	struct thermal_message_device __maybe_unused *thermal_msg = to_thermal_msg_device(dev);
 
 	if (kstrtoint(buf,10,&sconfig))
 		return -EINVAL;
@@ -1029,7 +1029,7 @@ static ssize_t
 temp_state_store(struct device *dev, struct device_attribute *devattr,
 		const char *buf, size_t count){
 	int temp_state;
-	struct thermal_message_device *thermal_msg = to_thermal_msg_device(dev);
+	struct thermal_message_device __maybe_unused *thermal_msg = to_thermal_msg_device(dev);
 
 	if (kstrtoint(buf,10,&temp_state))
 		return -EINVAL;
